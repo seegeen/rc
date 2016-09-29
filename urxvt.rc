@@ -6,7 +6,13 @@ Xft.hintstyle:hintsfull
 ! rgba subpixel hinting (for LCDs)
 Xft.rgba:subpixel
 xft.dpi: 96
-URxvt*letterSpace: -1
+URxvt.letterSpace: -1
+
+!Home/End
+URxvt.keysym.Home: \033[1~
+URxvt.keysym.End: \033[4~
+URxvt.keysym.KP_Home: \033[1~
+URxvt.keysym.KP_End:  \033[4~
 
 ! Screw scrolling, I have tmux
 urxvt*internalBorder: 0
@@ -46,11 +52,16 @@ urxvt.urgentOnBell: true
 *color7:    #CCCCC6
 *color15:   #F8F8F2
 
-URxvt*font:                 xft:Menlo for Powerline:regular:size=14
-URxvt*imFont:               xft:Menlo for Powerline:regular:size=14
-URxvt*boldFont:             xft:Menlo for Powerline:bold:size=14
-URxvt*italicFont:           xft:Menlo for Powerline:italic:size=14
-URxvt*boldItalicFont:       xft:Menlo for Powerline:bold:italic:size=14
+URxvt.font:                 xft:Menlo\ for\ Powerline:regular:size=12
+URxvt.imFont:               xft:Menlo\ for\ Powerline:regular:size=12
+URxvt.boldFont:             xft:Menlo for Powerline:bold:size=14
+URxvt.italicFont:           xft:Menlo for Powerline:italic:size=14
+URxvt.boldItalicFont:       xft:Menlo for Powerline:bold:italic:size=14
 
 URxvt*urgentOnBell: true
 XTerm*bellIsUrgent: true
+
+!Set correct terminal type
+XTerm*termName: xterm-256color
+URxvt*termName: rxvt-unicode
+

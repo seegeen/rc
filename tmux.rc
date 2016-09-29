@@ -1,3 +1,6 @@
+#Correct Term Type
+set -g default-terminal screen-256color
+
 set -s escape-time 0
 # 1 index tabs, because 2 is next to 1, not 0
 set -g base-index 1
@@ -87,10 +90,24 @@ bind p run "tmux set-buffer -- \"$(clip-paste)\"; tmux paste-buffer"
 bind C-v run "tmux set-buffer -- \"$(clip-paste -b)\"; tmux paste-buffer"
 
 # Vim copy mode
+
 set-window-option -g mode-keys vi
 bind-key -t vi-copy 'v' begin-selection
+bind-key -t vi-copy 'C-v' rectangle-toggle
 bind-key -t vi-copy 'y' copy-selection
 bind -t vi-copy Escape cancel
+
+
+# Toggle mouse on with ^B m
+bind m \
+  set -g mouse on \;\
+  display 'Mouse: ON'
+
+# Toggle mouse off with ^B M
+bind M \
+  set -g mouse off \;\
+  display 'Mouse: OFF'
+
 
 # Saner split window shortcuts
 bind-key | split-window -h -c "#{pane_current_path}"

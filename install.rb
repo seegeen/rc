@@ -6,15 +6,15 @@ BASE_DIR = File.dirname(__FILE__)
 
 links = {
   'fonts'     => '.fonts',
-  'gnome.rc'  => '.gnomerc',
+#   'gnome.rc'  => '.gnomerc',
   'tmux.rc'   => '.tmux.conf',
   'urxvt.rc'  => '.Xdefaults',
   'vim'       => '.vim',
   'vim.rc'    => '.vimrc',
-  'xmobar.rc' => '.xmobarrc',
-  'xmonad.rc' => '.xmonad/xmonad.hs',
-  'zprofile'  => '.zprofile',
-  'zsh.rc'    => '.zshrc'
+#   'xmobar.rc' => '.xmobarrc',
+#   'xmonad.rc' => '.xmonad/xmonad.hs',
+#   'zprofile'  => '.zprofile',
+#   'zsh.rc'    => '.zshrc'
 }
 
 def delete(file)
@@ -49,6 +49,11 @@ def update_git
 end
 
 def install_vim_plugins
+  if not File.exist?("~/.vim/bundle/Vundle.vim") then
+    puts "[Installing Vundle]"
+    output = ` git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+    puts "#{output}"
+  end
   puts "[Updating vim plugins]"
   output = `echo | echo | vim +PluginInstall +PluginUpdate +qall &>/dev/null`
   puts "#{output}"
@@ -56,7 +61,7 @@ end
 
 def compile_ycm
 	puts "[Compiling YouCompleteMe]"
-	output = `./vim/bundle/YouCompleteMe/install.sh`
+	output = `./vim/bundle/YouCompleteMe/install.py`
 	puts "#{output}"
 end
 
