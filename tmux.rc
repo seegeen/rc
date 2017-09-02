@@ -137,6 +137,7 @@ set -g @tpm_plugins "              \
   tmux-plugins/tmux-resurrect      \
   tmux-plugins/tmux-continuum      \
   tmux-plugins/tmux-cpu            \
+  tmux-plugins/tmux-yank           \
 "
 # initializes TMUX plugin manager
 run-shell ~/.rc/submodules/tpm/tpm
