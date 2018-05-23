@@ -3,6 +3,10 @@ set -s escape-time 0
 # 1 index tabs, because 2 is next to 1, not 0
 set -g base-index 1
 
+#prevent rename
+set allow-rename off
+set-option -g allow-rename off
+
 # Status
 set-option -g status on
 set-option -g status-interval 1

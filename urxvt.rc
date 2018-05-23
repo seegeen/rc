@@ -22,35 +22,35 @@ urxvt*depth: 32
 urxvt*saveLines: 0
 urxvt*secondaryScroll: false
 
-urxvt.urgentOnBell: true
+rxvt.urgentOnBell: true
 
 !COLORS
-*foreground:#a0a0a0
-*background:#1B1D1E
+urxvt*foreground:#a0a0a0
+urxvt*background:#1B1D1E
 ! black
-*color0:    #1B1D1E
-*color8:    #505354
+urxvt*color0:    #1B1D1E
+urxvt*color8:    #505354
 ! red
-*color1:    #F92672
-*color9:    #FF669D
+urxvt*color1:    #F92672
+urxvt*color9:    #FF669D
 ! green
-*color2:    #76B22E
-*color10:   #9ECD3F
+urxvt*color2:    #76B22E
+urxvt*color10:   #9ECD3F
 ! yellow
-*color3:    #FD971F
-*color11:   #E6DB74
+urxvt*color3:    #FD971F
+urxvt*color11:   #E6DB74
 ! blue
-*color4:    #C629FF
-*color12:   #038ACF
+urxvt*color4:    #C629FF
+urxvt*color12:   #038ACF
 ! magenta
-*color5:    #9E6FFE
-*color13:   #9E6FFE
+urxvt*color5:    #9E6FFE
+urxvt*color13:   #9E6FFE
 ! cyan
-*color6:    #5E7175
-*color14:   #66D9EF
+urxvt*color6:    #5E7175
+urxvt*color14:   #66D9EF
 ! white
-*color7:    #CCCCC6
-*color15:   #F8F8F2
+urxvt*color7:    #CCCCC6
+urxvt*color15:   #F8F8F2
 
 URxvt.font:                 xft:Menlo\ for\ Powerline:regular:size=12
 URxvt.imFont:               xft:Menlo\ for\ Powerline:regular:size=12

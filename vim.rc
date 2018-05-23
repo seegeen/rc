@@ -59,7 +59,7 @@ Plugin 'vim-perl/vim-perl'
 " Editing "
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-unimpaired'"
+Plugin 'tpope/vim-unimpaired'
 " Plugin 'Valloric/YouCompleteMe'
 " Plugin 'scrooloose/syntastic'
 " Plugin 'myint/syntastic-extras'
@@ -71,6 +71,8 @@ Plugin 'tpope/vim-unimpaired'"
 " Plugin 'vim-scripts/taglist.vim'
 " Plugin 'tmhedberg/matchit'
 " Plugin 'tpope/vim-surround'
+
+Plugin 'nfvs/vim-perforce'
 
 call vundle#end()            " required
 
@@ -200,6 +202,7 @@ noremap <Leader><SPACE> <ESC>:CtrlPMRUFiles<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_custom_ignore = '\v[\/](_build|(\.(git|hg|svn)))$'
+let g:ctrlp_root_markers = ['.p4ignore']
 let g:ctrlp_max_depth = 10
 let g:ctrlp_max_files = 0 "
 set wildignore+=*/tmp/*,*.o,*.so,*.swp,*.zip,*.jar,*.class,*.pdf,*.gif,*.png,*.jpg,*.o,*.hi "
@@ -213,6 +216,8 @@ else
         \ }
 endif
 
+nnoremap ,b :ls<CR>:buffer<Space>
+
 " vimux "
 function VimuxMakeRun()
   :VimuxInterruptRunner
@@ -221,13 +226,17 @@ function VimuxMakeRun()
 endfunction
 noremap <Leader>r :exec VimuxMakeRun()<CR>
 
-"Airline "
+"statusline"
 set laststatus=2   " Always show the statusline "
+
+"Airline "
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline) "
 autocmd VimEnter * AirlineToggleWhitespace
-"let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=1
 let g:airline_theme='tomorrow'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#buffer_idx_mod = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
