@@ -12,84 +12,58 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
-" Utilities 
-Plugin 'tpope/vim-obsession'
+" Color
+Plugin 'arcticicestudio/nord-vim'
+
+"Utilities
+Plugin 'christoomey/vim-tmux-navigator' "Move between panes
+Plugin 'tpope/vim-obsession' "resotre session
+Plugin 'dhruvasagar/vim-prosession' "auto obsession
+Plugin 'ConradIrwin/vim-bracketed-paste' "Auto :set paste for modern terms
+Plugin 'tmux-plugins/vim-tmux-focus-events' "Fixes focus issue in tmux
+Plugin 'Lokaltog/vim-easymotion' "better search
+Plugin 'kien/ctrlp.vim' "Open file
+Plugin 'sjl/gundo.vim' "Graphical undo
+"Airline
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tmux-plugins/vim-tmux-focus-events'
-"Plugin 'edkolev/tmuxline.vim'
-Plugin 'sjl/gundo.vim'
-Plugin 'ConradIrwin/vim-bracketed-paste'
-
-"Navigation
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-vinegar'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'benmills/vimux'
-Plugin 'kien/ctrlp.vim'
-
-" Color "
-Plugin 'godlygeek/csapprox'
-Plugin 'ap/vim-css-color'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'w0ng/vim-hybrid'
-Plugin 'tpope/vim-vividchalk'
-Plugin 'goatslacker/mango.vim'
-Plugin 'sjl/badwolf'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'felixhummel/setcolors.vim'
 
 " Language support "
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'vim-scripts/VimClojure'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'moll/vim-node'
-Plugin 'pangloss/vim-javascript'
-Plugin 'burnettk/vim-angular'
-Plugin 'elzr/vim-json'
-Plugin 'millermedeiros/vim-esformatter'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'sidorares/node-vim-debugger'
-Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'rust-lang/rust.vim'
 Plugin 'vim-perl/vim-perl'
+Plugin 'pangloss/vim-javascript'
+Plugin 'elzr/vim-json'
+Plugin 'cakebaker/scss-syntax.vim'
 
-" Editing "
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-unimpaired'
-" Plugin 'Valloric/YouCompleteMe'
-" Plugin 'scrooloose/syntastic'
-" Plugin 'myint/syntastic-extras'
-" Plugin 'mattn/emmet-vim'
-" Plugin 'terryma/vim-multiple-cursors'
-"  Plugin 'chrisbra/NrrwRgn'
-
-" Tag Support "
-" Plugin 'vim-scripts/taglist.vim'
-" Plugin 'tmhedberg/matchit'
-" Plugin 'tpope/vim-surround'
-
+" DM
 Plugin 'nfvs/vim-perforce'
 
 call vundle#end()            " required
 
-set linespace=2
-set showtabline=2
-set tabpagemax=15
-
+"Compatability
+set encoding=utf8
+set t_Co=256
+"Colors
+"set termguicolors
 set background=dark
- colorscheme bvemu
-" colorscheme mango
-"  colorscheme delek
-" colorscheme ecostation
-" colorscheme jellybean
-" colorscheme darkblue
-" colorscheme torte
-" colorscheme triplejelly
-" colorscheme desert
+let g:nord_italic = 1
+let g:nord_underline = 1
+let g:nord_italic_comments = 1
+"let g:nord_comment_brightness = 15
+"let g:nord_cursor_line_number_background = 1
+"let g:nord_uniform_diff_background = 1
+colorscheme nord
+
+"Copy/Paste
+set clipboard=unnamedplus "always add + (sends to cliboard)
+" paste mode - this avoid unexpceted effects pasting from other window
+set pastetoggle=<F11>
+
+"Space between lines
+set linespace=2
+"Show tabs in gvim not vim
+set showtabline=2
+"Max number of tabs
+set tabpagemax=15
 
 " make shell not suck Thanks Modules :(
 set shellcmdflag+=f
@@ -101,25 +75,9 @@ set vb
 set incsearch
 
 "syntax highlighting
-"set bg=light
 syntax on
 filetype plugin indent on
 
-"Compatability"
-set encoding=utf8
-set t_Co=256
-
-" Toggle relative numbers  on FocusLost
-autocmd FocusLost * :set number norelativenumber
-" Using vim-tmux-navigator bindings, on FocusLost ^[[O was left behind
-autocmd FocusLost * silent redraw!
-autocmd FocusGained * :set number relativenumber
-" Toggle relative numbers in insert mode
-autocmd InsertEnter * :set number norelativenumber
-autocmd InsertLeave * :set number relativenumber
-
-"autoindent
-"autocmd FileType perl set autoindent|set smartindent
 
 "2 space tabs
 set tabstop=2
@@ -137,9 +95,6 @@ set nostartofline
 set timeoutlen=1000
 set ttimeoutlen=10
 
-"Prevent comments from continuing
-autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
-
 "show matching brakets
 autocmd FileType perl set showmatch
 
@@ -149,23 +104,8 @@ set number
 "Customization and plugin mapping "
 let mapleader=","
 
-
 " Screw backups "
 set nobackup nowritebackup noswapfile
-
-"Perl"
-"check perl code with make
-autocmd FileType perl set makeprg=perl\ -c\ %\ $*
-autocmd FileType perl set errorformat=%f:%l:%m
-autocmd FileType perl set autowrite
-
-"Perl Critic
-set errorformat+=%m\ at\ %f\ line\ %l\.
-set errorformat+=%m\ at\ %f\ line\ %l
-noremap ,c :!time perlc --critic %<cr>
-
-" dont' use Q for Ex mode
-" map Q :q
 
 " make tab in v ident code
 vmap <tab> >gv
@@ -175,26 +115,27 @@ vmap <s-tab> <gv
 nmap <tab> I<tab><esc>
 nmap <s-tab> ^i<bs><esc>
 
-" paste mode - this avoid unexpceted effects pasting from other window
-set pastetoggle=<F11>
+" Toggle relative numbers  on FocusLost
+autocmd FocusLost * :set number norelativenumber
+" Using vim-tmux-navigator bindings, on FocusLost ^[[O was left behind
+autocmd FocusLost * silent redraw!
+autocmd FocusGained * :set number relativenumber
+" Toggle relative numbers in insert mode
+autocmd InsertEnter * :set number norelativenumber
+autocmd InsertLeave * :set number relativenumber
 
-" comment/uncomment blocks of code 
-vmap _c :s/^/#/gi<Enter>
-vmap _C :s/^#//gi<Enter>
+"Make buffers fun
+nnoremap <Leader>b :ls<CR>:buffer<Space>
+nnoremap <leader>bd :bufdo bd
 
-" my perl includes pod
-let perl_include_pod = 1
-
-" syntax color complex thing like@{${FOO}}
-let perl_extended_vars = 1
-
-" Tidy selected lines (or entire files) with _t:
-nnoremap <silent> _t :%!perltidy -ce -i=2 -q<Enter>
-vnoremap <silent> _t :!perltidy -ce -i=2 -q<Enter>
-
-" Deparse obfuscated code
-nnoremap <silent> _d :.!perl -MO=Deparse 2>/dev/null<cr>
-vnoremap <silent> _d :!perl -MO=Deparse 2>/dev/null<cr>
+"Airline "
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline) "
+autocmd VimEnter * AirlineToggleWhitespace
+let g:airline_powerline_fonts=1
+"let g:airline_theme='tomorrow'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+"let g:airline#extensions#tabline#buffer_idx_mod = 1
 
 "Ctrlp "
 noremap <Leader>b <ESC>:CtrlPBuffer<CR>
@@ -202,7 +143,7 @@ noremap <Leader><SPACE> <ESC>:CtrlPMRUFiles<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_custom_ignore = '\v[\/](_build|(\.(git|hg|svn)))$'
-let g:ctrlp_root_markers = ['.p4ignore']
+let g:ctrlp_root_markers = ['.p4ignore','.ctrlpstop']
 let g:ctrlp_max_depth = 10
 let g:ctrlp_max_files = 0 "
 set wildignore+=*/tmp/*,*.o,*.so,*.swp,*.zip,*.jar,*.class,*.pdf,*.gif,*.png,*.jpg,*.o,*.hi "
@@ -216,95 +157,10 @@ else
         \ }
 endif
 
-nnoremap ,b :ls<CR>:buffer<Space>
-
-" vimux "
-function VimuxMakeRun()
-  :VimuxInterruptRunner
-  :VimuxInterruptRunner
-  :VimuxRunCommand("clear;make")
-endfunction
-noremap <Leader>r :exec VimuxMakeRun()<CR>
-
-"statusline"
-set laststatus=2   " Always show the statusline "
-
-"Airline "
-set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline) "
-autocmd VimEnter * AirlineToggleWhitespace
-let g:airline_powerline_fonts=1
-let g:airline_theme='tomorrow'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#buffer_idx_mod = 1
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-let g:airline_section_y='%{ObsessionStatus()}'
-
 " gundo "
 nnoremap <Leader>u :GundoToggle<CR>
 
 " folds! "
-set foldenable
-set foldmethod=syntax
-set foldnestmax=2
-set foldlevel=1
-set foldlevelstart=1
-set foldminlines=10
-set fillchars=vert:\|,fold:\
-noremap <Leader>f zR
-" Toggle folds with space "
-fu! ToggleFold()
-  if foldlevel('.') == 0
-    normal! l
-  else
-    if foldclosed('.') < 0
-      . foldclose
-    else
-      . foldopen
-    endif
-  endif
-  echo
-endf
-noremap <space> :call ToggleFold()<CR>
-
-"Easycommenting "
-autocmd FileType js,coffee,c,cpp,java,javascript let b:comment_leader = '// '
-autocmd FileType vim,rc let b:comment_leader = '" ' "
-autocmd FileType conf,fstab,ruby,python,perl let b:comment_leader = '# '
-noremap <silent> <leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-noremap <silent> <leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
-
-"Search help "
-set incsearch ignorecase hlsearch
-set autoread
-set smartcase
-set magic
-set showmatch
-set mat=2
-set ai
-set si
-set wrap
-set nu
-
-" Systastic "
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=1
-let g:syntastic_loc_list_height=5
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_javascript_checkers = ['json_tool']
-let g:syntastic_make_checkers = ['gnumake']
-noremap <Leader><Tab> :Errors<CR>
-
-" Taglist "
-noremap <silent> <Leader>t :TlistToggle<CR>
-let Tlist_Auto_Open=1
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Ctags_Cmd='/usr/bin/ctags'
-
 set foldenable
 set foldmethod=syntax
 set foldnestmax=2
@@ -329,4 +185,41 @@ fu! ToggleFold()
 endf
 noremap <space> :call ToggleFold()<CR>
 
+"Easycommenting "
+autocmd FileType js,coffee,c,cpp,java,javascript let b:comment_leader = '// '
+autocmd FileType vim,rc let b:comment_leader = '" ' "
+autocmd FileType conf,fstab,ruby,python,perl let b:comment_leader = '# '
+noremap <silent> <leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> <leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+
+"syntax highlighting
+syntax on
+filetype plugin indent on
+
+"Perl
+" syntax color complex thing like@{${FOO}}
+let perl_extended_vars = 1
+let perl_include_pod = 1
+
+set t_BE=			" Prevent copy/paste problems after exiting vim
+set backspace=indent,eol,start	"Fixes issues with delete/backspace
+set hlsearch 			"Fixes issues with highlighting
+
+"define :Tidy command to run perltidy on visual selection || entire buffer"
+"command -range=% -nargs=* Tidy <line1>,<line2>!perltidy
+command -range=% -nargs=* Tidy <line1>,<line2>!perltidy --pro=$PERLTIDY
+
+"run :Tidy on entire buffer and return cursor to (approximate) original position"
+fun DoTidy()
+    let l = line(".")
+    let c = col(".")
+    :Tidy
+    call cursor(l, c)
+endfun
+
+"shortcut for normal mode to run on entire buffer then return to current line"
+au Filetype perl nmap <Leader>t :call DoTidy()<CR>
+
+"shortcut for visual mode to run on the the current visual selection"
+au Filetype perl vmap <Leader>t :Tidy<CR>
 

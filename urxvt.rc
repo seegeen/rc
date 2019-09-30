@@ -65,3 +65,4 @@ XTerm*bellIsUrgent: true
 XTerm*termName: xterm-256color
 URxvt*termName: rxvt-unicode
 
+
